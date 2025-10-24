@@ -1,1 +1,0 @@
-# Client SDK for AI providers 
