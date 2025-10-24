@@ -1,0 +1,350 @@
+/* src/styles/Sidebar.css */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    height: 100dvh;
+    box-sizing: border-box;
+    border-right: 1px solid rgb(240, 240, 240);
+    background-color: rgb(252, 252, 252);
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    top: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.sidebar .header {
+    padding: 0 8px;
+}
+
+.sidebar .header-icon {
+    padding: 0 6px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    padding: 0 8px;
+    max-width: 68%;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.newtask-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2px 8px;
+    gap: 2px;
+    box-sizing: border-box;
+}
+
+.new-task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.new-task.search {
+    margin-bottom: 2px;
+    padding: 9px 11px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 15px;
+}
+
+.new-task:hover {
+    background-color: #f1f1f1;
+}
+
+.conversation-container {
+    margin-top: 8px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    list-style-type: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.conversation-container.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.conversation-header {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #505050;
+}
+
+.conversation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 37px;
+    box-sizing: border-box;
+    margin: 0 8px;
+    padding: 6px 10px;
+    gap: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.conversation-item.search {
+    height: 45px;
+    padding: 10px;
+}
+
+.conversation-item:hover {
+    background-color: #f3f3f3;
+}
+
+.conversation-text,
+.loading-text {
+    padding: 4px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+}
+
+.conversation-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.conversation-text.search {
+    font-weight: 500;
+}
+
+.loading-text {
+    font-size: 13.5px;
+    color: #666;
+}
+
+.rename-input {
+    width: 100%;
+    padding: 4px 2px;
+    border: 0;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.active-conversation {
+    background-color: #f3f3f3;
+}
+
+.star-icon {
+    display: flex;
+    flex-shrink: 0;
+    opacity: 0;
+    font-size: 18px;
+    color: #d0d0d0;
+    transition: opacity 0.1s ease-in-out, color 0.1s ease-in-out;
+}
+
+.star-icon.no-click {
+    pointer-events: none;
+}
+
+.star-icon.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.no-result {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media (hover: hover) {
+    .conversation-item:hover .star-icon:not(.disabled) {
+        opacity: 1;
+    }
+
+    .star-icon:hover {
+        color: #ffd700;
+    }
+
+    .star-icon.starred:hover {
+        color: #d0d0d0;
+    }
+}
+
+.star-icon.starred {
+    opacity: 1;
+    color: #ffd700;
+}
+
+.context-menu {
+    font-size: 15px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 101;
+    border-radius: 4px;
+}
+
+.context-menu ul {
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    padding: 8px 0;
+}
+
+.context-menu li {
+    padding: 8px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.context-menu li {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.user-dropdown {
+    position: absolute;
+    bottom: 100%;
+    left: 10px;
+    right: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    z-index: 101;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-dropdown button {
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.user-dropdown button:hover {
+    background-color: #f3f3f3;
+}
+
+.user-container {
+    position: relative;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 25px 20px;
+    gap: 10px;
+    border-top: 1px solid rgb(240, 240, 240);
+    cursor: pointer;
+}
+
+.user-info:hover {
+    background-color: #f3f3f3;
+}
+
+.user-icon {
+    font-size: 28px;
+}
+
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    height: 60px;
+    font-size: 16px;
+    color: #333;
+    border-top: 1px solid rgb(248, 248, 248);
+}
+
+.dropdown-item:hover {
+    background-color: #f3f3f3;
+}
+
+.dropdown-item.user-billing {
+    border-top: 1px solid rgb(240, 240, 240);
+}
+
+.user-billing {
+    position: relative;
+}
+
+.billing-text,
+.refresh-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.1s ease, transform 0.2s ease;
+}
+
+.billing-text {
+    transform: translateY(0);
+}
+
+.refresh-button {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+}
+
+.user-billing:hover .billing-text {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+
+.user-billing:hover .refresh-button {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+@media (hover: hover) {
+    .conversation-item:hover .delete-icon {
+      opacity: 1;
+    }
+}
