@@ -77,10 +77,33 @@ Open [http://localhost:3000](http://localhost:3000) to see the application.
 
 ### Vercel (Recommended)
 
-1. Push your code to GitHub
-2. Import your repository in Vercel
-3. Configure environment variables in Vercel dashboard
-4. Deploy
+1. **Import Project**:
+   - Go to [vercel.com](https://vercel.com/dashboard)
+   - Click "New Project" → Import from GitHub
+   - Select `tomo-academy/Tomo-chatbot-new`
+
+2. **Configure Build Settings**:
+   ```
+   Framework: Next.js (auto-detected)
+   Build Command: npm run build
+   Output Directory: .next (auto-detected)
+   Install Command: npm install
+   Node.js Version: 18.x
+   ```
+
+3. **Environment Variables** (Add in Vercel Dashboard):
+   ```bash
+   OPENAI_API_KEY=your_openai_api_key
+   ANTHROPIC_API_KEY=your_anthropic_api_key
+   GOOGLE_GENERATIVE_AI_API_KEY=your_google_api_key
+   EXA_API_KEY=your_exa_api_key
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Deploy**: Click "Deploy" - Vercel handles the rest!
+
+📋 **Detailed deployment guide**: See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md)
 
 ### Docker
 
