@@ -1,10 +1,10 @@
-import { openai } from '@ai-sdk/openai';
-import { anthropic } from '@ai-sdk/anthropic';
-import { google } from '@ai-sdk/google';
-import { groq } from '@ai-sdk/groq';
-import { deepseek } from '@ai-sdk/deepseek';
-import { xai } from '@ai-sdk/xai';
-import { streamText } from 'ai';
+const { openai } = require('@ai-sdk/openai');
+const { anthropic } = require('@ai-sdk/anthropic');
+const { google } = require('@ai-sdk/google');
+const { groq } = require('@ai-sdk/groq');
+const { deepseek } = require('@ai-sdk/deepseek');
+const { xai } = require('@ai-sdk/xai');
+const { streamText } = require('ai');
 
 // AI Provider configurations
 const getProvider = (modelName) => {
@@ -25,7 +25,7 @@ const getProvider = (modelName) => {
   return openai('gpt-4o-mini');
 };
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -79,4 +79,4 @@ export default async function handler(req, res) {
       details: error.message 
     });
   }
-}
+};

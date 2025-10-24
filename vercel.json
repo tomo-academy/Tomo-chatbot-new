@@ -1,12 +1,11 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "build",
-  "installCommand": "npm install",
+  "installCommand": "npm install --legacy-peer-deps",
   "devCommand": "npm start",
   "functions": {
     "api/**/*.js": {
-      "runtime": "nodejs20.x",
-      "maxDuration": 60
+      "runtime": "@vercel/node"
     }
   },
   "rewrites": [

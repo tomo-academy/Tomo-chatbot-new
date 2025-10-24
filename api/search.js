@@ -1,7 +1,7 @@
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
+const { openai } = require('@ai-sdk/openai');
+const { streamText } = require('ai');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -55,4 +55,4 @@ Please provide a detailed, accurate, and helpful response in English. Include re
       details: error.message 
     });
   }
-}
+};
