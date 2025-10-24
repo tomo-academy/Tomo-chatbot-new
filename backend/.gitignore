@@ -1,0 +1,11 @@
+__pycache__
+.env
+.venv
+
+logs/
+uploads/
+generated/
+icons/
+shared_pages/
+
+config/mcp_servers.json
