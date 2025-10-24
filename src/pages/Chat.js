@@ -124,7 +124,7 @@ function Chat({ isTouch, chatMessageRef }) {
         }
         if (!res.ok) throw new Error('delete failed');
       } catch (err) {
-        setToastMessage("메세지 삭제 중 오류가 발생했습니다.");
+        setToastMessage("Error occurred while deleting message.");
         setShowToast(true);
       }
     },
@@ -134,7 +134,7 @@ function Chat({ isTouch, chatMessageRef }) {
   const sendMessage = useCallback(
     async (message, files = uploadedFiles) => {
       if (!message.trim()) {
-        setToastMessage("내용을 입력해주세요.");
+        setToastMessage("Please enter a message.");
         setShowToast(true);
         return;
       }
@@ -229,7 +229,7 @@ function Chat({ isTouch, chatMessageRef }) {
               return;
             }
             if (res.status === 413) {
-              setToastMessage("크기 제한을 초과하여 URL 인식에 실패했습니다.");
+              setToastMessage("File size limit exceeded, URL recognition failed.");
               setShowToast(true);
               return;
             }
@@ -257,7 +257,7 @@ function Chat({ isTouch, chatMessageRef }) {
       try {
         const selectedModel = models.find((m) => m.model_name === model);
         if (!selectedModel) {
-          throw new Error("선택한 모델이 유효하지 않습니다.");
+          throw new Error("Selected model is not valid.");
         }
         if (isInference) {
           setIsThinking(true);
@@ -333,7 +333,7 @@ function Chat({ isTouch, chatMessageRef }) {
                   updateAssistantMessage(assistantText, false);
                 }
               } catch (err) {
-                setErrorMessage("스트리밍 중 오류가 발생했습니다: " + err.message);
+                setErrorMessage("Streaming error occurred: " + err.message);
                 reader.cancel();
                 return;
               }

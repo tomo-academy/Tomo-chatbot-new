@@ -101,7 +101,7 @@ function Home({ isTouch }) {
       try {
         const selectedModel = models.find((m) => m.model_name === model);
         if (!selectedModel) {
-          throw new Error("선택한 모델이 유효하지 않습니다.");
+          throw new Error("Selected model is not valid.");
         }
         setIsLoading(true);
         
@@ -116,7 +116,7 @@ function Home({ isTouch }) {
           body: JSON.stringify({})
         });
         if (!res.ok) {
-          throw new Error('새 대화를 시작하는 데 실패했습니다.');
+          throw new Error('Failed to start new conversation.');
         }
         
         const data = await res.json();
@@ -209,13 +209,13 @@ function Home({ isTouch }) {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          무엇을 도와드릴까요?
+          How can I help you today?
         </motion.div>
       </div>
 
       <InputContainer
         isTouch={isTouch}
-        placeholder="내용 입력"
+        placeholder="Enter your message"
         extraClassName="main-input-container"
         inputText={inputText}
         setInputText={setInputText}
@@ -242,12 +242,12 @@ function Home({ isTouch }) {
               {canReadImage ? (
                 <>
                   <IoImageOutline style={{ fontSize: "40px" }} />
-                  <div className="drag-text">여기에 파일 또는 이미지를 추가하세요</div>
+                  <div className="drag-text">Drop files or images here</div>
                 </>
               ) : (
                 <>
                   <IoAttach style={{ fontSize: "40px" }} />
-                  <div className="drag-text">여기에 파일을 추가하세요</div>
+                  <div className="drag-text">Drop files here</div>
                 </>
               )}
             </div>

@@ -74,27 +74,34 @@ function AppContent() {
   useEffect(() => {
     async function checkLoginStatus() {
       try {
-        const statusRes = await fetch(`${process.env.REACT_APP_FASTAPI_URL}/auth/status`, { credentials: "include" });
-        if (!statusRes.ok) {
-          setIsLoggedIn(false);
-          setUserInfo(null);
-          return;
-        }
-        const statusData = await statusRes.json();
-        setIsLoggedIn(statusData.logged_in);
-        if (statusData.logged_in) {
-          fetchConversations();
-          try {
-            const userRes = await fetch(`${process.env.REACT_APP_FASTAPI_URL}/auth/user`, { credentials: "include" });
-            if (userRes.ok) {
-              const userData = await userRes.json();
-              setUserInfo(userData);
-            }
-          } catch (error) {}
-        }
+        // For now, we'll run without backend authentication
+        // Set logged in to true by default for standalone frontend mode
+        setIsLoggedIn(true);
+        setUserInfo({ username: "User", email: "user@ajstudioz.com" });
+        
+        // If you want to re-enable backend authentication later, uncomment:
+        // const statusRes = await fetch(`${process.env.REACT_APP_FASTAPI_URL}/auth/status`, { credentials: "include" });
+        // if (!statusRes.ok) {
+        //   setIsLoggedIn(false);
+        //   setUserInfo(null);
+        //   return;
+        // }
+        // const statusData = await statusRes.json();
+        // setIsLoggedIn(statusData.logged_in);
+        // if (statusData.logged_in) {
+        //   fetchConversations();
+        //   try {
+        //     const userRes = await fetch(`${process.env.REACT_APP_FASTAPI_URL}/auth/user`, { credentials: "include" });
+        //     if (userRes.ok) {
+        //       const userData = await userRes.json();
+        //       setUserInfo(userData);
+        //     }
+        //   } catch (error) {}
+        // }
       } catch (error) {
-        setIsLoggedIn(false);
-        setUserInfo(null);
+        // For standalone mode, still log in user
+        setIsLoggedIn(true);
+        setUserInfo({ username: "User", email: "user@ajstudioz.com" });
       }
     }
     checkLoginStatus();
@@ -242,8 +249,8 @@ function AppContent() {
         {shouldShowLogo && (
           <div className="header" style={{ padding: "0 20px" }}>
             <img
-              src={logo}
-              alt="DEVOCHAT"
+              src="/aj logo.jpg"
+              alt="AJ STUDIOZ"
               width="143.5px"
               onClick={() => navigate("/")}
               style={{ cursor: "pointer" }}
