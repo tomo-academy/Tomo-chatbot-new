@@ -9,7 +9,6 @@
       "maxDuration": 60
     }
   },
-  "regions": ["iad1", "syd1", "hnd1"],
   "rewrites": [
     {
       "source": "/api/:path*",

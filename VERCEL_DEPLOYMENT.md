@@ -90,7 +90,7 @@ In Vercel Dashboard → Project → Settings → Environment Variables:
 
 **Add each environment variable for all environments (Production, Preview, Development)**
 
-### 4. Advanced Build Settings
+### 4. Advanced Build Settings (Hobby Plan Compatible)
 ```json
 {
   "functions": {
@@ -98,10 +98,11 @@ In Vercel Dashboard → Project → Settings → Environment Variables:
       "maxDuration": 60
     }
   },
-  "regions": ["iad1"],
   "framework": "nextjs"
 }
 ```
+
+**Note**: Multi-region deployment requires Pro/Enterprise plans. The configuration above works with all Vercel plans including the free Hobby plan.
 
 ## 🚦 Deployment Process
 
@@ -150,6 +151,11 @@ API routes are configured to use Edge Runtime where possible.
 - Dynamic pages: Chat, Search results
 - ISR: Model configurations
 
+### 4. Vercel Plan Considerations
+- **Hobby Plan (Free)**: Single region deployment (US East by default)
+- **Pro Plan**: Multi-region deployment available
+- **Enterprise Plan**: Custom regions and advanced features
+
 ## 🔍 Monitoring & Debugging
 
 ### Build Logs
@@ -183,6 +189,11 @@ API routes are configured to use Edge Runtime where possible.
 - Check function logs in Vercel Dashboard
 - Verify API keys are correctly set
 - Test locally first: `npm run dev`
+
+#### 4. Multi-Region Deployment Error
+- **Error**: "Deploying Serverless Functions to multiple regions is restricted to the Pro and Enterprise plans"
+- **Solution**: Remove `"regions"` array from `vercel.json` for Hobby plan
+- **Alternative**: Upgrade to Pro plan for multi-region support
 
 ## 🎯 Post-Deployment Checklist
 
