@@ -84,8 +84,8 @@ CommandEmpty.displayName = 'CommandEmpty'
 
 const CommandGroup = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+  React.HTMLAttributes<HTMLDivElement> & { heading?: string }
+>(({ className, heading, children, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
@@ -93,7 +93,14 @@ const CommandGroup = React.forwardRef<
       className
     )}
     {...props}
-  />
+  >
+    {heading && (
+      <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground" cmdk-group-heading="">
+        {heading}
+      </div>
+    )}
+    {children}
+  </div>
 ))
 
 CommandGroup.displayName = 'CommandGroup'
@@ -112,14 +119,18 @@ CommandSeparator.displayName = 'CommandSeparator'
 
 const CommandItem = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> & { 
+    value?: string
+    onSelect?: (value: string) => void
+  }
+>(({ className, value, onSelect, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
       "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
       className
     )}
+    onClick={() => onSelect?.(value || '')}
     {...props}
   />
 ))
