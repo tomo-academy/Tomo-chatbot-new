@@ -6,6 +6,7 @@ import ModelSelector from "../components/ModelSelector";
 import InputContainer from "../components/InputContainer";
 import Toast from "../components/Toast";
 import "../styles/Common.css";
+import "../styles/MorphicChat.css";
 
 const sampleQuestions = [
   "What's the latest news in AI technology?",

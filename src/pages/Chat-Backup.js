@@ -9,6 +9,7 @@ import InputContainer from "../components/InputContainer";
 import Modal from "../components/Modal";
 import Toast from "../components/Toast";
 import "../styles/Common.css";
+import "../styles/MorphicChat.css";
 
 function Chat({ isTouch, chatMessageRef }) {
   const { conversation_id } = useParams();
