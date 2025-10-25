@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import MorphicAI from "../lib/morphic-ai";
+import morphicAI from "../lib/morphic-ai";
 import ModelSelector from "../components/ModelSelector";
 import InputContainer from "../components/InputContainer";
 import Toast from "../components/Toast";
@@ -32,9 +32,9 @@ function Home({ isTouch }) {
   useEffect(() => {
     const loadModels = async () => {
       try {
-        const loadedModels = await MorphicAI.loadModels();
+        const loadedModels = await morphicAI.loadModels();
         setModels(loadedModels);
-        setSelectedModel(MorphicAI.getCurrentModel());
+        setSelectedModel(morphicAI.getCurrentModel());
       } catch (error) {
         console.error('Failed to load models:', error);
         setToastMessage("Failed to load AI models");
@@ -57,14 +57,14 @@ function Home({ isTouch }) {
   // Handle model selection
   const handleModelChange = useCallback((model) => {
     setSelectedModel(model);
-    MorphicAI.setModel(model);
+    morphicAI.setModel(model);
   }, []);
 
   // Handle search mode toggle
   const handleSearchModeToggle = useCallback(() => {
     const newSearchMode = !searchMode;
     setSearchMode(newSearchMode);
-    MorphicAI.setSearchMode(newSearchMode);
+    morphicAI.setSearchMode(newSearchMode);
   }, [searchMode]);
 
   const sendMessage = useCallback(

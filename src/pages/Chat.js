@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import MorphicAI from "../lib/morphic-ai";
+import morphicAI from "../lib/morphic-ai";
 import ModelSelector from "../components/ModelSelector";
 import SearchResults from "../components/SearchResults";
 import Message from "../components/Message";
@@ -34,9 +34,9 @@ function Chat({ isTouch, chatMessageRef }) {
   useEffect(() => {
     const loadModels = async () => {
       try {
-        const loadedModels = await MorphicAI.loadModels();
+        const loadedModels = await morphicAI.loadModels();
         setModels(loadedModels);
-        setSelectedModel(MorphicAI.getCurrentModel());
+        setSelectedModel(morphicAI.getCurrentModel());
       } catch (error) {
         console.error('Failed to load models:', error);
         setToastMessage("Failed to load AI models");
@@ -50,14 +50,14 @@ function Chat({ isTouch, chatMessageRef }) {
   // Handle model selection
   const handleModelChange = useCallback((model) => {
     setSelectedModel(model);
-    MorphicAI.setModel(model);
+    morphicAI.setModel(model);
   }, []);
 
   // Handle search mode toggle
   const handleSearchModeToggle = useCallback(() => {
     const newSearchMode = !searchMode;
     setSearchMode(newSearchMode);
-    MorphicAI.setSearchMode(newSearchMode);
+    morphicAI.setSearchMode(newSearchMode);
   }, [searchMode]);
 
   const sendMessage = useCallback(
@@ -82,20 +82,21 @@ function Chat({ isTouch, chatMessageRef }) {
       const controller = new AbortController();
       abortControllerRef.current = controller;
 
+      let assistantMessage = "";
+      let currentSearchResults = null;
+
+      const assistantMessageObj = {
+        role: "assistant",
+        content: "",
+        id: generateMessageId(),
+        isComplete: false
+      };
+
+      setMessages(prev => [...prev, assistantMessageObj]);
+
       try {
-        let assistantMessage = "";
-        let currentSearchResults = null;
 
-        const assistantMessageObj = {
-          role: "assistant",
-          content: "",
-          id: generateMessageId(),
-          isComplete: false
-        };
-
-        setMessages(prev => [...prev, assistantMessageObj]);
-
-        await MorphicAI.chat([...messages, userMessage], {
+        await morphicAI.chat([...messages, userMessage], {
           onUpdate: (content) => {
             assistantMessage = content;
             setMessages(prev => 
@@ -122,7 +123,7 @@ function Chat({ isTouch, chatMessageRef }) {
             
             // Generate related questions
             if (searchMode && currentSearchResults) {
-              MorphicAI.generateRelatedQuestions([...messages, userMessage], message)
+              morphicAI.generateRelatedQuestions([...messages, userMessage], message)
                 .then(questions => {
                   if (questions.length > 0) {
                     setRelatedQuestions(questions);
